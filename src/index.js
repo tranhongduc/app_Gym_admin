@@ -27,7 +27,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <GlobalProvider>
-          <AppRoutes />
+        {/* <AppRoutes /> */}
+        <App />
       </GlobalProvider>
       {/* <App /> */}
     </BrowserRouter>

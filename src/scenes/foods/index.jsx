@@ -1,50 +1,69 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Header from "../../components/Header";
 
-const Invoices = () => {
+const Foods = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", headerName: "ID" },
+    {
+      field: "id",
+      headerName: "ID",
+      flex: 0.5
+    },
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
+      flex: 2,
       cellClassName: "name-column--cell",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "type",
+      headerName: "Type",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "food_allergy",
+      headerName: "Food Allergy",
       flex: 1,
     },
     {
-      field: "cost",
-      headerName: "Cost",
+      field: "calo",
+      headerName: "Calo",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
       flex: 1,
-      renderCell: (params) => (
-        <Typography color={colors.greenAccent[500]}>
-          ${params.row.cost}
-        </Typography>
-      ),
     },
     {
-      field: "date",
-      headerName: "Date",
+      field: "cooking_time",
+      headerName: "Cooking Time",
       flex: 1,
     },
   ];
 
   return (
     <Box m="20px">
-      <Header title="INVOICES" subtitle="List of Invoice Balances" />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Header title="Workout Foods" subtitle="List of Workout Foods" />
+        <Button type="submit" color="secondary" variant="contained" component={Link} to="/form">
+          <AddCircleOutlineIcon sx={{ color: colors.grey[100] }} />
+          <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+            Create New Food
+          </Typography>
+        </Button>
+      </Box>
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -54,6 +73,7 @@ const Invoices = () => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
+            fontSize: "16px",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -61,6 +81,7 @@ const Invoices = () => {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
+            fontSize: "16px",
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
@@ -74,10 +95,10 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid rows={mockDataInvoices} columns={columns} />
       </Box>
     </Box>
   );
 };
 
-export default Invoices;
+export default Foods;

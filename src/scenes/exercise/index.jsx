@@ -1,63 +1,79 @@
-import { Box } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Box, Button, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useTheme } from "@mui/material";
 
-const Contacts = () => {
+const Exercises = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    {
+      field: "id",
+      headerName: "ID",
+      flex: 0.5
+    },
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
+      flex: 2,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "type",
+      headerName: "Type",
+      flex: 1,
+    },
+    {
+      field: "practice_time",
+      headerName: "Practice Time",
       type: "number",
       headerAlign: "left",
       align: "left",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "total_exercises",
+      headerName: "Total Exercises",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
       flex: 1,
     },
     {
-      field: "address",
-      headerName: "Address",
-      flex: 1,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
+      field: "calo",
+      headerName: "Calo",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
       flex: 1,
     },
   ];
 
   return (
     <Box m="20px">
-      <Header
-        title="CONTACTS"
-        subtitle="List of Contacts for Future Reference"
-      />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Header
+          title="Manage Exercises"
+          subtitle="List of Exercises for Gym"
+        />
+        <Button type="submit" color="secondary" variant="contained">
+          <AddCircleOutlineIcon sx={{ color: colors.grey[100] }} />
+          <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+            Create New Exercise
+          </Typography>
+        </Button>
+      </Box>
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -67,6 +83,7 @@ const Contacts = () => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
+            fontSize: "16px",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
@@ -74,6 +91,7 @@ const Contacts = () => {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
+            fontSize: "16px",
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
@@ -93,11 +111,10 @@ const Contacts = () => {
         <DataGrid
           rows={mockDataContacts}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
   );
 };
 
-export default Contacts;
+export default Exercises;
